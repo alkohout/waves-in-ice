@@ -1,0 +1,24 @@
+kist_offset -7681400.33333333 
+kist_divider 10229660.51190476 
+imu_offset 0
+imu_divider 8192  
+
+#kist_offset -3656532.0 
+#kist_divider 6234624.0 
+#imu_offset 0
+#imu_divider 8192  
+
+#my $K_1G = 2578092;             # Mesaured average
+#my $K_0G = -3656532;            # Mesaured average
+#my $K_G = $K_1G - $K_0G;
+#$k = $k - $K_0G;
+#$k = $k / ($K_G / 1000);
+#
+
+#Device 1
+#       0G = -7681400.33333333
+#       1G = 2548260.17857143
+#Device 2
+#       0G = -7928784.92307692
+#       1G = 2224074.66666667
+

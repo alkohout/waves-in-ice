@@ -1,0 +1,178 @@
+# Directories
+PROGSDIR = bin
+BUILDDIR = build
+LOGDIR = log
+SRCDIR = src
+OUTDIR= out
+DEFINES=
+VERSION=WII_v3.27
+
+# TEST
+
+# C++ Flags and Includes
+CPP = gcc -Wl,--no-as-needed
+flags += -g
+INCLUDES += -I inc/
+ALL_CPPFLAGS = $(INCLUDES) $(flags) 
+LINK_CPPFLAGS = -lm
+
+progs = \
+	$(PROGSDIR)/$(VERSION)\
+        $(PROGSDIR)/test_maths
+
+# XXX This renaming is a temporary hack for output dirs. There is a better way?
+process_data_c = nrutil.c\
+	nr_four.c\
+        linreg.c\
+	sc_misc.c\
+	pd_misc.c\
+	qc.c\
+	util.c\
+	rpy.c\
+	mahony.c\
+	signal_conditioning.c\
+	direction.c\
+	process.c\
+	main.c 
+
+test_maths_c = nrutil.c\
+	nr_four.c\
+	qc.c\
+	util.c\
+  	rpy.c\
+	mahony.c\
+	sc_misc.c\
+	pd_misc.c\
+	tm_tank.c\
+        test_maths.c
+
+IN_FILES := $(shell find in -type f)
+process_data_o = $(patsubst %,$(BUILDDIR)/%,$(process_data_c:.c=.o))
+test_maths_o = $(patsubst %,$(BUILDDIR)/%,$(test_maths_c:.c=.o))
+
+
+all: clean build $(progs)
+	@-mkdir -p build
+	@-mkdir -p $(OUTDIR)
+	@-mkdir -p $(LOGDIR)
+
+debug: DEFINES+=-DPRINT_OUTPUT
+
+debug: clean build $(progs)
+	@-mkdir -p build
+	@-mkdir -p $(OUTDIR)
+	@-mkdir -p $(LOGDIR)
+
+boundcheck: DEFINES+=-DPRINT_OUTPUT
+boundcheck: flags += -fsanitize=address
+
+boundcheck: clean build $(progs)
+	@-mkdir -p build
+	@-mkdir -p $(OUTDIR)
+	@-mkdir -p $(LOGDIR)
+
+$(BUILDDIR):
+	mkdir -p $@
+
+# NOTE: Clever way to automatically add global definitions (might need a make clean)
+$(PROGSDIR)/$(VERSION): DEFINES+=-DCOMMAND_LINE
+$(PROGSDIR)/$(VERSION): DEFINES+=-DLOGGER
+#$(PROGSDIR)/$(VERSION): DEFINES+=-DSAMPLE_64
+$(PROGSDIR)/$(VERSION): DEFINES+=-DSAMPLE_8
+#$(PROGSDIR)/$(VERSION): DEFINES+=-DARCTIC
+$(PROGSDIR)/$(VERSION): DEFINES+=-DWAVETANK
+#$(PROGSDIR)/$(VERSION): DEFINES+=-DID_SPECT_BAND
+$(PROGSDIR)/$(VERSION): DEFINES+=-DSEND_RAW
+$(PROGSDIR)/$(VERSION): DEFINES+=-DSEND_DIRECTION
+	
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_accel=1280
+$(PROGSDIR)/$(VERSION): DEFINES+=-Ddt=0.5
+$(PROGSDIR)/$(VERSION): DEFINES+=-Ddt_raw=0.125
+$(PROGSDIR)/$(VERSION): DEFINES+=-Ddt_raw64=0.015625
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_raw=5120
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_raw64=40960
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_accelfft=2048
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_psd=55
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_mom=7
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dn_calib=4
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dg=9.80665
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dpi=3.141592653589793
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drmv_ramp=1
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dstd_kist_min=.1
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f1=0.01
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f2=0.02
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f3=0.10
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f4=0.12
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f5=0.03
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f6=0.5
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f7=0.04
+$(PROGSDIR)/$(VERSION): DEFINES+=-Drspns_f8=0.25
+$(PROGSDIR)/$(VERSION): DEFINES+=-Darduino=1
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dstd_yaw_limit=90.0
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnstd_kist=3
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnstd_imu=6
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnstd_magno=6
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnstd_gyro=6
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnstd_pos=6
+$(PROGSDIR)/$(VERSION): DEFINES+=-Dnoise_factor=0.2
+$(PROGSDIR)/$(VERSION): DEFINES+=-Ddeclination=17.08674
+
+#Test defines
+$(PROGSDIR)/test_maths: DEFINES+=-DCOMMAND_LINE
+$(PROGSDIR)/test_maths: DEFINES+=-DLOGGER
+#$(PROGSDIR)/test_maths: DEFINES+=-DSAMPLE_64
+$(PROGSDIR)/$(VERSION): DEFINES+=-DSAMPLE_8
+#$(PROGSDIR)/$(VERSION): DEFINES+=-DARCTIC
+#$(PROGSDIR)/test_maths: DEFINES+=-DID_SPECT_BAND
+#$(PROGSDIR)/$(VERSION): DEFINES+=-DWAVETANK
+$(PROGSDIR)/test_maths: DEFINES+=-DSEND_RAW
+$(PROGSDIR)/test_maths: DEFINES+=-DSEND_DIRECTION
+$(PROGSDIR)/test_maths: DEFINES+=-Dn_psd=55
+$(PROGSDIR)/test_maths: DEFINES+=-Dn_mom=7
+$(PROGSDIR)/test_maths: DEFINES+=-Dn_calib=4
+$(PROGSDIR)/test_maths: DEFINES+=-Dg=9.80665
+$(PROGSDIR)/test_maths: DEFINES+=-Dpi=3.141592653589793
+$(PROGSDIR)/test_maths: DEFINES+=-Drmv_ramp=1
+$(PROGSDIR)/test_maths: DEFINES+=-Dstd_kist_min=.1
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f1=0.01
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f2=0.02
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f3=0.03
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f4=0.04
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f5=0.03
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f6=0.5
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f7=0.04
+$(PROGSDIR)/test_maths: DEFINES+=-Drspns_f8=0.25
+$(PROGSDIR)/test_maths: DEFINES+=-Dstd_yaw_limit=90.0
+$(PROGSDIR)/test_maths: DEFINES+=-Dnstd_kist=3
+$(PROGSDIR)/test_maths: DEFINES+=-Dnstd_imu=6
+$(PROGSDIR)/test_maths: DEFINES+=-Dnstd_magno=6
+$(PROGSDIR)/test_maths: DEFINES+=-Dnstd_gyro=6
+$(PROGSDIR)/test_maths: DEFINES+=-Dnstd_pos=6
+$(PROGSDIR)/test_maths: DEFINES+=-Dnoise_factor=0.2
+$(PROGSDIR)/test_maths: DEFINES+=-DTANK
+
+$(PROGSDIR)/$(VERSION): $(process_data_o)
+	@echo "$(VERSION)"
+	$(CPP) -o $@ $(process_data_o) $(ALL_CPPFLAGS) $(LINK_CPPFLAGS) $(DEFINES) 
+	
+$(PROGSDIR)/test_maths: $(test_maths_o)
+	@echo "test_maths"
+	$(CPP) $(ALL_CPPFLAGS) $(LINK_CPPFLAGS) $(DEFINES) -o $@ $(test_maths_o) 
+
+clean: 
+	@rm -f $(BUILDDIR)/*.o $(progs)
+
+$(BUILDDIR)/%.o:$(SRCDIR)/%.c
+	@echo " $*".c
+	$(CPP) $(ALL_CPPFLAGS) $(DEFINES) -c -o $@ $<
+
+$(OUTDIR)/spec_anal.out: $(PROGSDIR)/$(VERSION) $(IN_FILES)
+	@echo Generating $@ via $<
+	@-mkdir -p $(OUTDIR)
+	$(PROGSDIR)/$(VERSION)
+
+
+display: $(OUTDIR)/spec_anal.out
+	@perl bin/display
+
+

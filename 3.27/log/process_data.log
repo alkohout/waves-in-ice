@@ -1,0 +1,288 @@
+Start main
+
+Read calibration file
+Calibration file read
+Read meta file
+Read raw data
+Sampling at 64 Hz 
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Start decimate
+    n1: 40960.000000
+    Butter worth filter with 64 Hz sample rate, 2 Hz cut off
+    step: 8.000000
+End decimate
+Raw data read
+
+Start signal_conditioning
+Start quality_control
+Start quality_control_accel
+Start patch
+End patch
+Start patch
+End patch
+Start patch
+End patch
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats
+Start test_stats
+End test_stats
+Start test_stats
+End test_stats
+End quality_control_accel
+Start quality_control_gyro
+Start patch
+End patch
+Start patch
+End patch
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats: 1.000000
+Start test_stats
+End test_stats: 1.000000
+Start test_stats
+End test_stats: 1.000000
+End quality_control_gyro
+Start quality_control_magno
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats: 1.000000
+Start test_stats
+End test_stats: 1.000000
+Start test_stats
+End test_stats: 1.000000
+End quality_control_magno
+Start quality_control_rollpitch
+Start test_stats
+End test_stats
+Start test_stats
+End test_stats
+End quality_control_rollpitch
+Start quality_control_heading
+Start test_stats
+End test_stats: 1.000000
+End quality_control_heading
+End quality_control
+Kistler Failed. IMU used to calculate vertical acceleration
+Start north_east
+Magnetometer yaw at each time step used for heading
+End north_east
+Start quality_control_fft
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats
+End quality_control_fft
+Start quality_control_fft
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats
+End quality_control_fft
+Start quality_control_fft
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start despike
+End despike
+Start patch
+End patch
+Start test_stats
+End test_stats
+End quality_control_fft
+Start decimate
+    n1: 5120.000000
+    Butter worth filter with 8 Hz sample rate, 0.5 Hz cut off
+    step: 4.000000
+End decimate
+Start decimate
+    n1: 5120.000000
+    Butter worth filter with 8 Hz sample rate, 0.5 Hz cut off
+    step: 4.000000
+End decimate
+Start decimate
+    n1: 5120.000000
+    Butter worth filter with 8 Hz sample rate, 0.5 Hz cut off
+    step: 4.000000
+End decimate
+End signal_conditioning
+
+Start ProccesData
+Start identify spectral band
+Start intgrt_press
+Start rspns
+End rspns
+End intgrt_press
+Start identify_low_frequency_noise
+End identify_low_frequency_noise
+Start intgrt_press
+Start rspns
+End rspns
+End intgrt_press
+End identify spectral band
+Start deterministic_analysis
+End deterministic_analysis
+Start wave_direction_FEM_2hz_accel
+End wave_direction_FEM_2hz
+Start intgrt_press
+Start rspns
+End rspns
+End intgrt_press
+End ProccesData
+
+End main

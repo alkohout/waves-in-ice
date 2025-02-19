@@ -1,0 +1,32 @@
+ACCEL QUALITY FLAGS
+Quality flag x = 0
+Quality flag y = 0
+Quality flag z = 0
+Number of unresponsive x = 0
+Number of unresponsive y = 0
+Number of unresponsive z = 0
+Number of spikes x = 3
+Number of spikes y = 0
+Number of spikes z = 0
+GYRO QUALITY FLAGS
+Quality flag x = 1
+Quality flag y = 1
+Quality flag z = 1
+Number of unresponsive x = 5117
+Number of unresponsive y = 5117
+Number of unresponsive z = 5117
+Number of spikes x = 0
+Number of spikes y = 0
+Number of spikes z = 0
+MAGNO QUALITY FLAGS
+Quality flag x = 0
+Quality flag y = 0
+Quality flag z = 0
+Number of spikes x = 0
+Number of spikes y = 0
+Number of spikes z = 0
+ROLL/PITCH QUALITY FLAG
+Quality flag = 0
+HEADING QUALITY FLAG
+Quality flag = 1
+Total power check x = 0.002228

@@ -1,0 +1,10 @@
+new_version=3.27
+
+echo " "
+echo "Run new data" 
+cp Makefile_run Makefile
+rm out/*.out
+make debug 
+./bin/WII_v${new_version}
+
+

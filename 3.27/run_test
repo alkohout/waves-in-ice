@@ -1,0 +1,35 @@
+new_version=3.27
+
+#cp in/raw.log in/input_raw.log 
+#cp in/meta.out in/input_meta.out
+
+echo " "
+echo "Testing Maths" 
+cp in/815_rawtest.log in/raw.log
+cp in/815_metatest.out in/meta.out
+cp Makefile_test_misc Makefile
+rm out/*.out
+rm log/*.log
+make debug 
+./bin/test_maths
+
+echo " "
+echo "Testing wave height and Tp using rig data" 
+cp in/rig_47_7648.log in/raw.log
+cp Makefile_test_rig Makefile
+rm out/*.out
+make debug 
+./bin/WII_v${new_version}
+./bin/test_maths
+
+
+#echo " "
+#echo "Testing Hs using wave tank data" 
+#cp in/tank_192.log in/raw.log
+#cp Makefile_test_tank Makefile
+#rm out/*.out
+#make debug 
+#./bin/WII_v${new_version}
+#./bin/test_maths
+#
+
