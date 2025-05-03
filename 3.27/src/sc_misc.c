@@ -102,8 +102,22 @@ void gpsraw_2_gps8hz(struct DATARAW *data_raw, struct RETDATA *return_data){
 }
 
 // ********************************************************************************
+/*
+ * decimate()
+ *
+ * Apply a 2nd-order Butterworth low-pass filter to `input` of length n_in,
+ * then downsample by the integer factor step = sr_in/sr_out and store in `output`
+ * (length n_out).
+ *
+ * Parameters:
+ *   in   pointer to the input samples (length n1)
+ *   out  pointer to the output buffer (length n2)
+ *   sr1  original sample rate
+ *   sr2  desired (lower) sample rate
+ *   n1   number of input samples
+ *   n2   number of output samples
+ */
 // ********************************************************************************
-
 void decimate(long double *in, long double *out, float sr1, float sr2, int n1, int n2) {
 
        logger("Start decimate",0.0);
