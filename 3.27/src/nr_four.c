@@ -61,8 +61,28 @@ void convlv(long double data[], unsigned long n, long double respns[], unsigned 
 }
 
 // ********************************************************************************
+/******************************************************************************
+ * Function: spctrm_psd
+ * Purpose: Calculates Power Spectral Density using Welch's method with
+ *          overlapping segments and 10% cosine tapering
+ * 
+ * Parameters:
+ *   disp[] - Input displacement time series data
+ *   p[]    - Output array for power spectral density values
+ *   m      - Half the segment length (full segment = 2m)
+ *   k      - Number of segments to average (determines overlap)
+ * 
+ * Returns:
+ *   0 on success
+ * 
+ * Notes:
+ *   - Applies detrending and demeaning to each segment
+ *   - Uses 10% cosine taper window
+ *   - Includes overlap processing for improved spectral estimates
+ *   - Normalizes output by window power and number of segments
+ * 
+ *****************************************************************************/
 // ********************************************************************************
-
 int spctrm_psd(long double disp[], long double p[], int m, int k) {
 
         FILE *id;
