@@ -71,9 +71,47 @@ int north_east(struct DATARAW *data_raw, struct RETDATA *return_data){
     return r;
 }
 
-// ********************************************************************************
-// ********************************************************************************
-
+/******************************************************************************
+ * Function: wave_direction_FEM_2hz_accel
+ * Purpose: Estimates wave direction using FEM (First-order Extended Maximum 
+ *          likelihood Method) from 2Hz accelerometer and motion sensor data
+ * 
+ * Parameters:
+ *   accel[]       - Vertical acceleration time series
+ *   pitch[]       - Pitch motion time series
+ *   roll[]        - Roll motion time series
+ *   return_data   - Struct containing output parameters including:
+ *                   - direction_full[] (Full directional spectrum)
+ *                   - peak_direction   (Direction at spectral peak)
+ *                   - direction        (Mean direction)
+ *                   - spread          (Directional spread)
+ *                   - ratio           (Directional quality parameter)
+ *                   - hs_dir          (Significant wave height)
+ * 
+ * Returns:
+ *   0 on success
+ * 
+ * Notes:
+ *   - Uses cross-spectral analysis between vertical and horizontal motions
+ *   - Frequency range defined by rspns_f7 to rspns_f8
+ *   - Outputs directional parameters in degrees (0° = waves toward East)
+ *   - Implements circular statistics for directional averaging
+ *   - Includes spectral analysis using Welch's method
+ *   
+ * References:
+ *   - Extended Maximum Likelihood Method for wave direction analysis
+ *   - Circular statistics for directional spread calculation
+ * 
+ * Output Files:
+ *   - roll_spectra.out  - Roll motion spectra
+ *   - pitch_spectra.out - Pitch motion spectra
+ *   - accel_spectra.out - Acceleration spectra
+ *   - direction_full.out - Full directional spectrum
+ *   - spread.out        - Directional spread
+ * 
+ * Author: [Your Name]
+ * Date: [Date]
+ *****************************************************************************/
 int wave_direction_FEM_2hz_accel(long double *accel, long double *pitch, long double *roll, struct RETDATA *return_data){
 
        logger("Start wave_direction_FEM_2hz_accel",0);
