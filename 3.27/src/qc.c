@@ -33,9 +33,49 @@ void quality_control(struct DATARAW *data_raw, struct RETDATA *return_data){
      return;
 }
 
-// ********************************************************************************
-// ********************************************************************************
-
+/******************************************************************************
+ * Function: quality_control_accel
+ * Purpose: Performs quality control checks on accelerometer data including
+ *          spike detection, flat signal detection, and statistical validation
+ * 
+ * Parameters:
+ *   data_raw    - Struct containing raw accelerometer data:
+ *                 - accel_raw_kist (Kistler accelerometer)
+ *                 - accel_raw_x/y/z (IMU accelerometer axes)
+ *   return_data - Struct containing quality flags and metrics:
+ *                 - qflg_kist (Kistler quality flag)
+ *                 - qflg_accel (IMU quality flag)
+ *                 - qflg_pkist (Kistler percentage flag)
+ * 
+ * Returns:
+ *   void
+ * 
+ * Quality Checks:
+ *   1. Flat Signal Detection
+ *      - Identifies unresponsive periods
+ *      - Threshold: 0.5
+ *      - Applies patch correction
+ *   
+ *   2. Spike Detection
+ *      - Kistler: 10 iterations with nstd_kist threshold
+ *      - IMU: Single pass with nstd_imu threshold
+ *      - Applies patch correction after detection
+ *   
+ *   3. Statistical Validation
+ *      - Performs basic statistical tests
+ *      - Sets quality flags based on results
+ * 
+ * Output Metrics:
+ *   - Percentage of compromised data
+ *   - Counts of detected spikes and flat periods
+ *   - Separate quality flags for Kistler and IMU data
+ * 
+ * Notes:
+ *   - Implements different thresholds for Kistler and IMU
+ *   - Patches detected issues in-place
+ *   - Generates detailed quality control log if PRINT_OUTPUT defined
+ *
+ *****************************************************************************/
 void quality_control_accel(struct DATARAW *data_raw, struct RETDATA *return_data){
 
     logger("Start quality_control_accel",0.0);
